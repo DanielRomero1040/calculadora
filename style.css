@@ -1,0 +1,130 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.89);
+
+}
+
+div.calculadora{
+    margin-top: 40px;
+    background-color: rgba(134, 36, 36, 0.562);
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: repeat(6, 80px) ;
+    grid-gap: 10px;
+    grid-template-areas:
+    "pantalla pantalla pantalla pantalla"
+    "vacio1 vacio2 borrar dividir"
+    "siete ocho nueve multiplicar"
+    "cuatro cinco seis restar"
+    "uno dos tres sumar"
+    "vacio3 cero coma igual" 
+    ;
+    font-size: 25px;
+    padding: 20px 10px 10px 10px;
+    border-radius: 10px;
+}
+
+.calculadora div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    width: 100px;
+    background-color:  rgba(134, 36, 36, 0.911);
+    border-radius: 3px;
+    box-shadow: 0.5px 0.5px 1px gray;
+}
+
+.calculadora div:hover{
+    background-color: rgba(136, 104, 104, 0.911);
+}
+.calculadora div:active{
+    background-color: rgba(136, 104, 104, 0.911);
+    transform: scale(0.98);
+}
+
+div.cero{
+    grid-area: cero;    
+}
+div.uno{
+    grid-area: uno;    
+}
+div.dos{
+    grid-area: dos;   
+}
+div.tres{
+    grid-area: tres;
+}
+div.cuatro{
+    grid-area: cuatro;
+}
+div.cinco{
+    grid-area: cinco;
+}
+div.seis{
+    grid-area: seis;
+}
+div.siete{
+    grid-area: siete;
+}
+div.ocho{
+    grid-area: ocho;
+}
+div.nueve{
+    grid-area: nueve;
+}
+div.igual{
+    grid-area: igual;
+}
+div.restar{
+    grid-area: restar;
+}
+div.sumar{
+    grid-area: sumar;
+}
+div.multiplicar{
+    grid-area: multiplicar;
+}
+div.dividir{
+    grid-area: dividir;
+}
+div.coma{
+    grid-area: coma;
+}
+div.borrar{
+    grid-area: borrar;
+}
+div.pantalla{
+    grid-area: pantalla;
+    height: 80px ;
+    width: 430px;
+    margin: 2px 0;
+    background-color: rgb(91, 91, 92);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-right: 15px;
+}
+div.vacio1{
+    grid-area: vacio1;
+}
+div.vacio2{
+    grid-area: vacio2;
+}
+div.vacio3{
+    grid-area: vacio3;
+}
+
