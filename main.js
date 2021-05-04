@@ -17,40 +17,57 @@ let uno = document.getElementById('uno'),
     dividir = document.getElementById('dividir'),
     coma = document.getElementById('coma'),
     pantalla = document.getElementById('pantalla'),
+    historialContenedor = document.getElementById('historial-contenedor'),
+    contenedorModal = document.getElementsByClassName('modal-container')[0],
+    historico = document.getElementById('historial'),
+    botonCerrar = document.getElementById('cerrar'),
+    modalHistorico = document.getElementsByClassName('modal-historial')[0],
+    acumuladorHistorial = '',
+    resultado = 0,
     operando1,
     operando2,
     operacion;
-
+const historial = [];
 
 //eventos
-uno.onclick = function(e){
+uno.addEventListener('click', () => {
+    limpiarDespuesDeResolver()
     pantalla.textContent = pantalla.textContent +'1';
-}
-dos.onclick = function(e){
+})
+dos.addEventListener('click', () => {
+    limpiarDespuesDeResolver()
     pantalla.textContent = pantalla.textContent +'2';
-}
-tres.onclick = function(e){
+})
+tres.addEventListener('click', () => {
+    limpiarDespuesDeResolver()
     pantalla.textContent = pantalla.textContent +'3';
-}
+})
 cuatro.onclick = function(e){
+    limpiarDespuesDeResolver()
     pantalla.textContent = pantalla.textContent +'4';
 }
-cinco.onclick = function(e){
+cinco.addEventListener('click', () => {
+    limpiarDespuesDeResolver()
     pantalla.textContent = pantalla.textContent +'5';
-}
+})
 seis.onclick = function(e){
+    limpiarDespuesDeResolver()
     pantalla.textContent = pantalla.textContent +'6';
 }
 siete.onclick = function(e){
+    limpiarDespuesDeResolver()
     pantalla.textContent = pantalla.textContent +'7';
 }
 ocho.onclick = function(e){
+    limpiarDespuesDeResolver()
     pantalla.textContent = pantalla.textContent +'8';
 }
 nueve.onclick = function(e){
+    limpiarDespuesDeResolver()
     pantalla.textContent = pantalla.textContent +'9';
 }
 cero.onclick = function(e){
+    limpiarDespuesDeResolver()
     pantalla.textContent = pantalla.textContent +'0';
 }
 borrar.onclick = function(e){
@@ -84,18 +101,41 @@ igual.onclick = function(e){
     resolver();
 }
 
-function limpiar(){
+historico.addEventListener('click', ()=>{
+    contenedorModal.classList.toggle('modal-active')
+    showHistory()
+})
+botonCerrar.addEventListener('click', ()=>{
+    contenedorModal.classList.remove('modal-active')
+})
+contenedorModal.addEventListener('click', ()=>{
+    botonCerrar.click()
+})
+
+let showHistory = ()=>{
+    historial.forEach( element => {
+        acumuladorHistorial += `<p ml-2>${element}</p>`
+    })
+    document.getElementById('historial-contenedor').innerHTML = acumuladorHistorial;
+};
+
+let limpiar = () => {
     pantalla.textContent = '';
+};
+
+let limpiarDespuesDeResolver =()=>{
+    if (resultado !== 0){
+        pantalla.textContent = '';
+    }
 }
-function resetear(){
+
+let resetear = () => {    
     pantalla.textContent = '';
     opeando1 = 0;
     operando2 = 0;
     operacion = '';
-}
-function resolver(){
-
-    let resultado = 0;
+};
+let resolver = () => {    
     if (operacion === '+'){
         resultado = parseFloat(operando1) + parseFloat(operando2);
     }
@@ -110,10 +150,31 @@ function resolver(){
         resultado = parseFloat(operando1) / parseFloat(operando2);
     }
     else{
-        alert("hola")
+        resultado = '0';
     };
-    resetear();
+    historial.push(resultado);
+    historialenLocal = localStorage.setItem('historial', JSON.stringify(historial))
+    //resetear();
     pantalla.textContent = resultado;
-}
+};
+
+let iniciarHistorial = () => {
+    historialenLocal = JSON.parse(localStorage.getItem('historial'));  
+    if (historialenLocal){
+        let continuarOperando = prompt("Desea Continuar con el historico guardado?");
+      if (continuarOperando == "si"){        
+        historialenLocal.forEach(element => { acumuladorHistorial += `<p ml-2>${element}</p>`     
+        });
+        document.getElementById('historial-contenedor').innerHTML = acumuladorHistorial;
+        historial = historialenLocal;             
+      }else{
+        localStorage.removeItem('historial');
+        historial = [];
+      }
+    }
+};
+
+iniciarHistorial();
+
 
 
